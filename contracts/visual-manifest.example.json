@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "themeId": "lelia.manor",
+  "assets": [
+    {
+      "id": "portrait.lelia.neutral",
+      "kind": "Portrait",
+      "source": { "type": "ModFile", "path": "assets/portraits/lelia_neutral.png" },
+      "canvas": { "width": 256, "height": 384 },
+      "pivotNormalized": { "x": 0.5, "y": 1.0 },
+      "sampling": "LinearClamp",
+      "provenance": "placeholder",
+      "assetVersion": 1
+    },
+    {
+      "id": "portrait.lelia.working",
+      "kind": "Portrait",
+      "source": { "type": "ModFile", "path": "assets/portraits/lelia_working.png" },
+      "canvas": { "width": 256, "height": 384 },
+      "pivotNormalized": { "x": 0.5, "y": 1.0 },
+      "sampling": "LinearClamp",
+      "provenance": "placeholder",
+      "assetVersion": 1
+    },
+    {
+      "id": "portrait.lelia.tired",
+      "kind": "Portrait",
+      "source": { "type": "ModFile", "path": "assets/portraits/lelia_tired.png" },
+      "canvas": { "width": 256, "height": 384 },
+      "pivotNormalized": { "x": 0.5, "y": 1.0 },
+      "sampling": "LinearClamp",
+      "provenance": "placeholder",
+      "assetVersion": 1
+    },
+    {
+      "id": "effects.fog.soft",
+      "kind": "Fog",
+      "source": { "type": "ModFile", "path": "assets/effects/fog_soft.png" },
+      "canvas": { "width": 256, "height": 256 },
+      "sampling": "LinearClamp",
+      "provenance": "placeholder",
+      "assetVersion": 1
+    },
+    {
+      "id": "map.manor.exterior",
+      "kind": "Map",
+      "source": { "type": "ContentAsset", "path": "Maps/LeliaFarm_Manor" },
+      "canvas": { "width": 1024, "height": 640 },
+      "provenance": "placeholder",
+      "assetVersion": 1
+    }
+  ],
+  "hud": {
+    "portrait": {
+      "anchor": "BottomLeft",
+      "maxWidthFraction": 0.18,
+      "maxHeightFraction": 0.40,
+      "marginUiPixels": 16,
+      "hideWhenMenuOpen": true
+    },
+    "tasks": { "maxVisible": 3, "maxWidthFraction": 0.25 }
+  },
+  "sceneEffects": {
+    "targetFarmOnly": true,
+    "fog": { "enabled": true, "opacity": 0.10, "speedWorldPixelsPerSecond": 4 }
+  }
+}

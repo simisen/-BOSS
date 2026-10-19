@@ -1,0 +1,14 @@
+# 构建产物
+bin/
+obj/
+*.user
+
+# 本机私有配置（包含游戏安装路径），不纳入版本控制
+local.props
+
+# 本机工具（文档解析、API 反射、SMAPI 载荷），可重新下载
+.tools/
+
+# 测试与临时输出
+TestResults/
+*.trx

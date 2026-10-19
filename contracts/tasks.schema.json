@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://leliafarm.local/contracts/tasks.schema.json",
+  "title": "LeliaFarm 引导任务定义",
+  "description": "三个引导任务以配置驱动，不为单条任务写专用 UI 或专用代码。未知 objectiveType / scope 一律拒绝整份配置。",
+  "type": "object",
+  "required": ["schemaVersion", "tasks"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "tasks": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/task" }
+    }
+  },
+  "$defs": {
+    "task": {
+      "type": "object",
+      "required": ["id", "titleKey", "objectiveType"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "稳定任务 ID，写入存档的键；发布后改名必须提供迁移。"
+        },
+        "titleKey": {
+          "type": "string",
+          "minLength": 1,
+          "description": "i18n 键（i18n/default.json）。"
+        },
+        "objectiveType": {
+          "enum": ["CurrentCropCount", "PetAnimalToday", "DeliverProduce"],
+          "description": "首版只支持这三种；只接受枚举名，不接受数字。"
+        },
+        "target": { "type": "integer", "minimum": 0 },
+        "scope": { "const": "TargetFarm" },
+        "latchWhenReached": {
+          "type": "boolean",
+          "description": "true 表示达成后锁定进度（不是历史计数）。"
+        },
+        "autoClaim": {
+          "type": "boolean",
+          "description": "true 表示达成即结算为 Claimed；false 则进入 ReadyToClaim 等待领取。"
+        },
+        "reward": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "gold": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "acceptedItemIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "pattern": "^\\([A-Z]\\)[0-9A-Za-z_.]+$" },
+          "description": "DeliverProduce 必填。限定物品 ID，例如 (O)24 = 防风草。"
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "objectiveType": { "const": "DeliverProduce" } }, "required": ["objectiveType"] },
+          "then": { "required": ["acceptedItemIds"] }
+        },
+        {
+          "if": { "properties": { "objectiveType": { "const": "CurrentCropCount" } }, "required": ["objectiveType"] },
+          "then": { "properties": { "target": { "minimum": 1 } }, "required": ["target"] }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "task.plant5.title": "在修道院农场种下 5 格作物",
+  "task.pet.title": "抚摸一只农场动物",
+  "task.deliver.title": "向修道院交付 1 件农产品",
+
+  "task.progress.crops": "当前有效作物 {{current}}/{{target}} 格",
+  "task.progress.pet": "今日尚未抚摸动物",
+  "task.progress.deliver": "走到交付点，手持农产品后交互",
+  "task.progress.done": "已完成",
+
+  "task.completed": "任务完成：{{title}}",
+  "task.readyToClaim": "任务可领取：{{title}}",
+  "task.reward.gold": "获得 {{amount}} 金",
+
+  "delivery.success": "已交付 {{item}}",
+  "delivery.rollback": "交付失败，物品已退回",
+  "delivery.alreadyDone": "这项交付已经完成过了",
+  "delivery.notActive": "这项任务还没有启用",
+  "delivery.noItem": "请手持 1 件符合要求的农产品",
+  "delivery.notAccepted": "{{item}} 不是本次交付要求的农产品",
+  "delivery.busy": "正在处理上一次交付，请稍候",
+
+  "hud.hidden": "LeliaFarm HUD 已隐藏",
+  "hud.shown": "LeliaFarm HUD 已显示",
+  "hud.title": "修道院农场"
+}

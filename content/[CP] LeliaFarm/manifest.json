@@ -1,0 +1,18 @@
+{
+  "Name": "Lelia Farm Content",
+  "Author": "AliceXitina",
+  "Version": "0.1.0",
+  "Description": "Lelia 主题修道院农场的内容包：注册 Data/AdditionalFarms 农场类型、提供灰盒地图与图块贴图。需要 Content Patcher 与 LeliaFarm.Core。",
+  "UniqueID": "LeliaFarm.Content",
+  "UpdateKeys": [],
+  "ContentPackFor": {
+    "UniqueID": "Pathoschild.ContentPatcher",
+    "MinimumVersion": "2.0.0"
+  },
+  "Dependencies": [
+    {
+      "UniqueID": "LeliaFarm.Core",
+      "IsRequired": true
+    }
+  ]
+}

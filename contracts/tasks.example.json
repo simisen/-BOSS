@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "tasks": [
+    {
+      "id": "intro.plant_5",
+      "titleKey": "task.plant5.title",
+      "objectiveType": "CurrentCropCount",
+      "target": 5,
+      "scope": "TargetFarm",
+      "latchWhenReached": true,
+      "autoClaim": true,
+      "reward": { "gold": 0 }
+    },
+    {
+      "id": "intro.pet_animal",
+      "titleKey": "task.pet.title",
+      "objectiveType": "PetAnimalToday",
+      "target": 1,
+      "scope": "TargetFarm",
+      "latchWhenReached": true,
+      "autoClaim": true,
+      "reward": { "gold": 0 }
+    },
+    {
+      "id": "intro.deliver_produce",
+      "titleKey": "task.deliver.title",
+      "objectiveType": "DeliverProduce",
+      "target": 1,
+      "scope": "TargetFarm",
+      "latchWhenReached": true,
+      "autoClaim": true,
+      "reward": { "gold": 300 },
+      "acceptedItemIds": ["(O)24", "(O)188", "(O)186", "(O)184"]
+    }
+  ]
+}

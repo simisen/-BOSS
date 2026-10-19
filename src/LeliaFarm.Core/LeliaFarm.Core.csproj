@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- 与游戏运行时一致：Stardew Valley 1.6.15 / SMAPI 4.5.2 均为 net6.0 -->
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>LeliaFarm.Core</AssemblyName>
+    <RootNamespace>LeliaFarm.Core</RootNamespace>
+    <Version>0.1.0</Version>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+
+    <!-- 构建不自动部署、不打包 zip：部署走 scripts/deploy-test.ps1 到明确测试目录 -->
+    <EnableModDeploy>false</EnableModDeploy>
+    <EnableModZip>false</EnableModZip>
+    <EnableModHelper>false</EnableModHelper>
+    <ModFolderName>LeliaFarm.Core</ModFolderName>
+  </PropertyGroup>
+
+  <!-- 本机游戏路径（私有），缺失时回退到 ModBuildConfig 的自动探测 -->
+  <Import Project="..\..\local.props" Condition="Exists('..\..\local.props')" />
+
+  <ItemGroup>
+    <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.4.0" />
+  </ItemGroup>
+
+  <!-- 显式指定 TargetPath：避免输出目录出现大小写不一致（assets -> Assets），
+       这会破坏 Linux/macOS 上的路径解析，也容易让美术接手时找错文件。 -->
+  <ItemGroup>
+    <None Update="manifest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="i18n\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      
+    </None>
+    <None Update="assets\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      
+    </None>
+  </ItemGroup>
+
+</Project>

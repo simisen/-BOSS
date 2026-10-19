@@ -1,0 +1,32 @@
+{
+  "Format": "2.0.0",
+  "Changes": [
+    {
+      "Action": "Load",
+      "Target": "Maps/lelia_farm_tiles",
+      "FromFile": "assets/tilesheets/lelia_farm_tiles.png"
+    },
+    {
+      "Action": "Load",
+      "Target": "LeliaFarm/UI/farm_icon",
+      "FromFile": "assets/ui/farm_icon.png"
+    },
+    {
+      "Action": "Load",
+      "Target": "Maps/LeliaFarm_Manor",
+      "FromFile": "maps/manor_farm.tmx"
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/AdditionalFarms",
+      "Entries": {
+        "LeliaFarm.Content_ManorFarm": {
+          "Id": "LeliaFarm.Content_ManorFarm",
+          "MapName": "Maps/LeliaFarm_Manor",
+          "IconTexture": "LeliaFarm/UI/farm_icon",
+          "SpawnMonstersByDefault": false
+        }
+      }
+    }
+  ]
+}

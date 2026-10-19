@@ -1,0 +1,9 @@
+{
+  "Name": "Lelia Farm Core",
+  "Author": "AliceXitina",
+  "Version": "0.1.0",
+  "Description": "Lelia 主题修道院农场的核心逻辑：农场识别、引导任务、交付、占位 HUD、存档与诊断。需要内容包 [CP] LeliaFarm 才会生成农场。",
+  "UniqueID": "LeliaFarm.Core",
+  "EntryDll": "LeliaFarm.Core.dll",
+  "MinimumApiVersion": "4.0.0"
+}

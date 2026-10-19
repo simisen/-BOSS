@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://leliafarm.local/contracts/visual-manifest.schema.json",
+  "title": "LeliaFarm 视觉资源清单",
+  "description": "Codex 交付视觉资源时使用的清单格式。稳定资源 ID 与物理路径分离；路径必须限制在 Mod 内容根目录内。",
+  "type": "object",
+  "required": ["schemaVersion", "themeId", "assets"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "themeId": { "type": "string", "minLength": 1 },
+    "assets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/asset" }
+    },
+    "hud": { "$ref": "#/$defs/hud" },
+    "sceneEffects": { "$ref": "#/$defs/sceneEffects" }
+  },
+  "$defs": {
+    "asset": {
+      "type": "object",
+      "required": ["id", "kind", "source", "canvas", "provenance", "assetVersion"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(\\.[a-z0-9]+)+$",
+          "description": "稳定资源 ID，如 portrait.lelia.neutral。发布后不应改名。"
+        },
+        "kind": {
+          "enum": ["Portrait", "UiFrame", "Fog", "Map", "Appearance", "TileSheet"]
+        },
+        "source": {
+          "type": "object",
+          "required": ["type", "path"],
+          "additionalProperties": false,
+          "properties": {
+            "type": { "enum": ["ModFile", "ContentAsset"] },
+            "path": {
+              "type": "string",
+              "minLength": 1,
+              "description": "ModFile 时为相对 Mod 内容根目录的路径（禁止 .. 与绝对路径）；ContentAsset 时为游戏资产名。"
+            }
+          }
+        },
+        "canvas": {
+          "type": "object",
+          "required": ["width", "height"],
+          "additionalProperties": false,
+          "properties": {
+            "width": { "type": "integer", "minimum": 1, "maximum": 8192 },
+            "height": { "type": "integer", "minimum": 1, "maximum": 8192 }
+          }
+        },
+        "pivotNormalized": {
+          "type": "object",
+          "required": ["x", "y"],
+          "additionalProperties": false,
+          "properties": {
+            "x": { "type": "number", "minimum": 0, "maximum": 1 },
+            "y": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        },
+        "sampling": { "enum": ["PointClamp", "LinearClamp"] },
+        "provenance": {
+          "enum": ["placeholder", "final", "unverified"],
+          "description": "来源状态，仅用于追踪；占位资源不得作为可发布素材。"
+        },
+        "assetVersion": { "type": "integer", "minimum": 1 },
+        "frames": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "x", "y", "width", "height"],
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string", "minLength": 1 },
+              "x": { "type": "integer", "minimum": 0 },
+              "y": { "type": "integer", "minimum": 0 },
+              "width": { "type": "integer", "minimum": 1 },
+              "height": { "type": "integer", "minimum": 1 }
+            }
+          }
+        }
+      }
+    },
+    "hud": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "portrait": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "anchor": { "const": "BottomLeft" },
+            "maxWidthFraction": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+            "maxHeightFraction": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+            "marginUiPixels": { "type": "number", "minimum": 0, "maximum": 512 },
+            "hideWhenMenuOpen": { "type": "boolean" }
+          }
+        },
+        "tasks": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "maxVisible": { "type": "integer", "minimum": 0, "maximum": 5 },
+            "maxWidthFraction": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+          }
+        }
+      }
+    },
+    "sceneEffects": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "targetFarmOnly": { "type": "boolean" },
+        "fog": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["enabled"],
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+            "speedWorldPixelsPerSecond": { "type": "number", "minimum": 0, "maximum": 200 }
+          }
+        }
+      }
+    }
+  }
+}

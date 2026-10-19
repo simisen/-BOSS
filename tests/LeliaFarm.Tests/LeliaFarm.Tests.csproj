@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>LeliaFarm.Tests</RootNamespace>
+    <AssemblyName>LeliaFarm.Tests</AssemblyName>
+  </PropertyGroup>
+
+  <!--
+    纯逻辑测试：只链接不依赖 SMAPI / 游戏程序集的源码文件。
+    这样领域规则（任务、交付、迁移、清单校验、HUD 布局）可以完全脱离游戏进程运行。
+  -->
+  <ItemGroup>
+    <Compile Include="..\..\src\LeliaFarm.Core\Domain\**\*.cs" LinkBase="Linked\Domain" />
+    <Compile Include="..\..\src\LeliaFarm.Core\Persistence\SaveRoot.cs" Link="Linked\Persistence\SaveRoot.cs" />
+    <Compile Include="..\..\src\LeliaFarm.Core\Visuals\VisualManifest.cs" Link="Linked\Assets\VisualManifest.cs" />
+    <Compile Include="..\..\src\LeliaFarm.Core\Visuals\VisualManifestValidator.cs" Link="Linked\Assets\VisualManifestValidator.cs" />
+    <Compile Include="..\..\src\LeliaFarm.Core\Delivery\DeliveryItemSnapshot.cs" Link="Linked\Delivery\DeliveryItemSnapshot.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+  <!-- 把随包发布的实际资产复制到测试输出，直接校验"实物"而不是"示例" -->
+  <ItemGroup>
+    <None Include="..\..\src\LeliaFarm.Core\assets\tasks.json" Link="Assets\tasks.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\src\LeliaFarm.Core\assets\visual-manifest.json" Link="Assets\visual-manifest.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\content\[CP] LeliaFarm\**\*" Link="ContentPack\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
